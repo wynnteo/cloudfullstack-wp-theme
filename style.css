@@ -1,0 +1,553 @@
+<?php
+/*
+Theme Name: Nordic Tech
+Description: A clean, minimalist WordPress theme inspired by Scandinavian design principles. Perfect for personal blogs, portfolios, and tech-focused websites.
+Author: Your Name
+Version: 1.0
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nordic-tech
+*/
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2c2c2c;
+    --accent-color: #9f8e7f;
+    --wood-warm: #a8a591;
+    --wood-light: #d0c0af;
+    --warm-beige: #c4bab2;
+    --light-beige: #d9d7d0;
+    --sage-warm: #ceb89f;
+    --text-dark: #2c2c2c;
+    --text-light: #6b6b6b;
+    --background: #fefefe;
+    --background-light: #f7f5f3;
+    --background-warm: #faf8f5;
+    --border-light: #e8e6e3;
+    --shadow: 0 2px 10px rgba(44,44,44,0.08);
+    --shadow-hover: 0 8px 25px rgba(44,44,44,0.12);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--background);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: var(--background);
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--wood-warm) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.logo-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.logo-tagline {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--warm-beige);
+    border-radius: 25px;
+    background: var(--light-beige);
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.search-box input:focus {
+    border-color: var(--accent-color);
+    background: var(--background);
+    box-shadow: 0 0 0 3px rgba(159, 142, 127, 0.1);
+}
+
+/* Main Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    padding: 2rem 0;
+    min-height: calc(100vh - 200px);
+}
+
+.content-area {
+    flex: 1;
+}
+
+/* WordPress Specific Classes */
+.wp-block-image {
+    margin: 2rem 0;
+}
+
+.wp-block-image img {
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.wp-block-quote {
+    background: var(--light-beige);
+    padding: 2rem;
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.wp-block-code {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+}
+
+/* Post Styles */
+.post {
+    background: var(--background);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    border: 1px solid var(--light-beige);
+}
+
+.post:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    transition: all 0.3s ease;
+}
+
+.post-thumbnail {
+    height: 250px;
+    background: linear-gradient(45deg, var(--wood-light), var(--sage-warm));
+    position: relative;
+    overflow: hidden;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 2rem;
+}
+
+.post-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.post-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.post-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    color: var(--accent-color);
+}
+
+.post-excerpt {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--primary-color);
+}
+
+.post-tags {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 0.25rem 0.75rem;
+    background: var(--sage-warm);
+    border: 1px solid var(--wood-light);
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background: var(--wood-light);
+    color: var(--text-dark);
+}
+
+/* Sidebar & Widgets */
+.sidebar {
+    background: var(--background);
+}
+
+.widget {
+    background: var(--background);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--light-beige);
+}
+
+.widget h3, .widget .widget-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.widget ul {
+    list-style: none;
+}
+
+.widget ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--light-beige);
+}
+
+.widget ul li:last-child {
+    border-bottom: none;
+}
+
+.widget ul li a {
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+
+.widget ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a1a 100%);
+    color: white;
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--accent-color);
+}
+
+.footer-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.footer-widget h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--sage-warm);
+}
+
+.footer-widget p {
+    line-height: 1.6;
+    color: #cccccc;
+    margin-bottom: 1rem;
+}
+
+.footer-widget ul {
+    list-style: none;
+}
+
+.footer-widget ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-widget ul li a {
+    color: #cccccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-widget ul li a:hover {
+    color: var(--sage-warm);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #999999;
+}
+
+/* Navigation Menu */
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.menu-item a:hover {
+    color: var(--accent-color);
+}
+
+/* Comments */
+.comments-area {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-beige);
+}
+
+.comment-list {
+    list-style: none;
+}
+
+.comment {
+    background: var(--light-beige);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.comment-form {
+    background: var(--background-light);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--warm-beige);
+    border-radius: 8px;
+    background: var(--background);
+    margin-bottom: 1rem;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(159, 142, 127, 0.1);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0;
+}
+
+.pagination a,
+.pagination span {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--light-beige);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.pagination .current {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .logo-tagline {
+        font-size: 0.7rem;
+    }
+
+    .footer-widgets {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Accessibility */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.skip-link {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    z-index: 999999;
+    border-radius: 0 0 8px 8px;
+}
+
+.skip-link:focus {
+    top: 0;
+}
