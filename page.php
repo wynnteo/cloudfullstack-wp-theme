@@ -1,6 +1,14 @@
 <?php get_header(); ?>
 
 <main class="container">
+    <!-- Add hero section for pages if needed -->
+    <?php if (is_front_page()) : ?>
+    <section class="hero">
+        <h1>Welcome to Nordic Tech</h1>
+        <p>Exploring the intersection of technology, design, and Scandinavian minimalism. Join me on a journey through clean code, elegant solutions, and thoughtful innovation.</p>
+    </section>
+    <?php endif; ?>
+
     <div class="main-content">
         <div class="content-area">
             <?php while (have_posts()) : the_post(); ?>

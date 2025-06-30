@@ -146,10 +146,42 @@ add_filter('excerpt_more', 'nordic_tech_excerpt_more');
 function nordic_tech_reading_time() {
     $content = get_post_field('post_content', get_the_ID());
     $word_count = str_word_count(strip_tags($content));
-    $reading_time = ceil($word_count / 200); // Average reading speed: 200 words per minute
+    $reading_time = ceil($word_count / 200); // Average reading speed
     return $reading_time;
 }
 
+
+// custom user meta fields for social links
+function nordic_tech_user_profile_fields($user) {
+    ?>
+    <h3>Social Media Links</h3>
+    <table class="form-table">
+        <tr>
+            <th><label for="github">GitHub URL</label></th>
+            <td><input type="url" name="github" id="github" value="<?php echo esc_attr(get_the_author_meta('github', $user->ID)); ?>" class="regular-text" /></td>
+        </tr>
+        <tr>
+            <th><label for="linkedin">LinkedIn URL</label></th>
+            <td><input type="url" name="linkedin" id="linkedin" value="<?php echo esc_attr(get_the_author_meta('linkedin', $user->ID)); ?>" class="regular-text" /></td>
+        </tr>
+        <tr>
+            <th><label for="twitter">Twitter URL</label></th>
+            <td><input type="url" name="twitter" id="twitter" value="<?php echo esc_attr(get_the_author_meta('twitter', $user->ID)); ?>" class="regular-text" /></td>
+        </tr>
+    </table>
+    <?php
+}
+add_action('show_user_profile', 'nordic_tech_user_profile_fields');
+add_action('edit_user_profile', 'nordic_tech_user_profile_fields');
+
+function nordic_tech_save_user_profile_fields($user_id) {
+    if (!current_user_can('edit_user', $user_id)) { return false; }
+    update_user_meta($user_id, 'github', $_POST['github']);
+    update_user_meta($user_id, 'linkedin', $_POST['linkedin']);
+    update_user_meta($user_id, 'twitter', $_POST['twitter']);
+}
+add_action('personal_options_update', 'nordic_tech_save_user_profile_fields');
+add_action('edit_user_profile_update', 'nordic_tech_save_user_profile_fields');
 /**
  * Fallback menu for primary navigation
  */

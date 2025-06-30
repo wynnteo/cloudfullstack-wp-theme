@@ -55,6 +55,46 @@
                     </div>
                 </article>
                 
+                <!-- Related Posts Section -->
+                <?php
+                $categories = get_the_category($post->ID);
+                if ($categories) {
+                    $category_ids = array();
+                    foreach ($categories as $individual_category) $category_ids[] = $individual_category->term_id;
+                    
+                    $args = array(
+                        'category__in' => $category_ids,
+                        'post__not_in' => array($post->ID),
+                        'posts_per_page' => 3,
+                    );
+                    $related_posts = new WP_Query($args);
+                    
+                    if ($related_posts->have_posts()) :
+                ?>
+                <div class="related-posts">
+                    <h3>Related Posts</h3>
+                    <div class="related-grid">
+                        <?php while ($related_posts->have_posts()) : $related_posts->the_post(); ?>
+                        <div class="related-card">
+                            <div class="related-image">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('thumbnail'); ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="related-content">
+                                <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                                <p><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
+                            </div>
+                        </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+                <?php 
+                    endif;
+                    wp_reset_postdata();
+                }
+                ?>
+                
                 <?php
                 // If comments are open or we have at least one comment, load up the comment template.
                 if (comments_open() || get_comments_number()) :
