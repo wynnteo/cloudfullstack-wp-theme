@@ -551,3 +551,359 @@ footer {
 .skip-link:focus {
     top: 0;
 }
+
+/* Additional styles for new components - Add this to your style.css */
+
+/* Single Post & Page Styles */
+.single-post .post-body,
+.single-page .post-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.single-post .post-body h2,
+.single-page .post-body h2 {
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.single-post .post-body h3,
+.single-page .post-body h3 {
+    margin: 1.5rem 0 0.75rem;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+}
+
+.single-post .post-body p {
+    margin-bottom: 1.5rem;
+}
+
+.single-post .post-body img,
+.single-page .post-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: var(--shadow);
+}
+
+/* Post Navigation */
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-beige);
+}
+
+.post-navigation .nav-previous,
+.post-navigation .nav-next {
+    flex: 1;
+}
+
+.post-navigation .nav-next {
+    text-align: right;
+}
+
+.post-navigation a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--light-beige);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.post-navigation a:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--light-beige);
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.page-title span {
+    color: var(--accent-color);
+}
+
+/* Page Excerpt */
+.page-excerpt {
+    background: var(--light-beige);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: var(--text-light);
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Page Links */
+.page-links {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-beige);
+    text-align: center;
+}
+
+.page-links a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    background: var(--light-beige);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.page-links a:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* Comments */
+.comments-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.comment-list {
+    list-style: none;
+    margin-bottom: 3rem;
+}
+
+.comment {
+    background: var(--light-beige);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--accent-color);
+}
+
+.comment-author {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.comment-author .avatar {
+    border-radius: 50%;
+}
+
+.comment-metadata {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.comment-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.reply {
+    margin-top: 1rem;
+}
+
+.comment-reply-link {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.comment-reply-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+/* Comment Form */
+.comment-form {
+    background: var(--background-light);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 3rem;
+}
+
+.comment-reply-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.comment-form-comment label,
+.comment-form-author label,
+.comment-form-email label,
+.comment-form-url label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--warm-beige);
+    border-radius: 8px;
+    background: var(--background);
+    margin-bottom: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(159, 142, 127, 0.1);
+}
+
+.comment-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.comment-form .form-submit {
+    margin-bottom: 0;
+}
+
+.comment-form .submit {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.comment-form .submit:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Search Form Enhancements */
+.search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+}
+
+.search-field {
+    flex: 1;
+    padding: 0.6rem 2.5rem 0.6rem 1.2rem;
+    border: 1px solid var(--warm-beige);
+    border-radius: 25px;
+    background: var(--light-beige);
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.search-field:focus {
+    border-color: var(--accent-color);
+    background: var(--background);
+    box-shadow: 0 0 0 3px rgba(159, 142, 127, 0.1);
+}
+
+.search-submit {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.search-submit:hover {
+    color: var(--accent-color);
+}
+
+.search-submit svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* No Comments Message */
+.no-comments {
+    background: var(--light-beige);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Comments Navigation */
+.comment-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.comment-navigation a {
+    padding: 0.75rem 1.5rem;
+    background: var(--light-beige);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.comment-navigation a:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .post-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .post-navigation .nav-next {
+        text-align: left;
+    }
+    
+    .search-form {
+        max-width: 100%;
+    }
+}
