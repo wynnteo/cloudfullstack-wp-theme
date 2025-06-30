@@ -389,9 +389,11 @@ add_action('save_post', 'nordic_tech_save_featured_post_meta');
 
 /**
  * Enqueue additional scripts for filtering functionality
+ * Fixed to only load on appropriate pages
  */
 function nordic_tech_enqueue_filter_scripts() {
-    if (is_home() || is_category()) {
+    // Only load on blog/archive pages, NOT on single posts
+    if (is_home() || is_category() || is_tag() || is_archive()) {
         wp_enqueue_script('jquery');
         wp_add_inline_script('jquery', '
             jQuery(document).ready(function($) {
@@ -405,19 +407,17 @@ function nordic_tech_enqueue_filter_scripts() {
                         $(this).addClass("active");
                         
                         var category = $(this).data("category");
-                        
-                        // Filter posts (this would need AJAX for full functionality)
-                        // For now, we\'ll just use the href navigation
                     }
                 });
                 
-                // Search functionality enhancement
+                // Search functionality enhancement - only for blog pages
                 var searchTimeout;
                 $(".search-field").on("input", function() {
                     clearTimeout(searchTimeout);
                     var query = $(this).val().toLowerCase();
                     
                     searchTimeout = setTimeout(function() {
+                        // Only target post cards on archive pages
                         $(".post-card").each(function() {
                             var title = $(this).find(".post-title").text().toLowerCase();
                             var excerpt = $(this).find(".post-excerpt").text().toLowerCase();
@@ -542,18 +542,29 @@ function nordic_tech_add_structured_data() {
 add_action('wp_head', 'nordic_tech_add_structured_data');
 
 /**
- * Add reading progress bar (optional enhancement)
+ * Add reading progress bar (fixed version)
  */
 function nordic_tech_add_reading_progress() {
     if (is_single()) {
         ?>
         <div id="reading-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--accent-color); z-index: 9999; transition: width 0.3s ease;"></div>
         <script>
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('reading-progress').style.width = scrolled + '%';
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateProgress() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                const progressBar = document.getElementById('reading-progress');
+                if (progressBar) {
+                    progressBar.style.width = scrolled + '%';
+                }
+            }
+            
+            window.addEventListener('scroll', updateProgress);
+            window.addEventListener('resize', updateProgress);
+            
+            // Initial call
+            updateProgress();
         });
         </script>
         <?php

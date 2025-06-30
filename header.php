@@ -22,17 +22,7 @@
     <nav class="container">
         <div class="logo-area">
             <div class="logo-icon">
-                <?php 
-                $site_title = get_bloginfo('name');
-                $initials = '';
-                $words = explode(' ', $site_title);
-                foreach ($words as $word) {
-                    if (!empty($word)) {
-                        $initials .= strtoupper(substr($word, 0, 1));
-                    }
-                }
-                echo esc_html(substr($initials, 0, 2));
-                ?>
+                W
             </div>
             <div class="logo-text">
                 <?php if (is_front_page() && is_home()) : ?>

@@ -405,6 +405,7 @@ a img.aligncenter {
 .hero {
     text-align: center;
     padding: 4rem 0;
+    margin-top: 40px;
     background: linear-gradient(135deg, var(--light-beige) 0%, var(--warm-beige) 100%);
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--wood-light);
@@ -454,7 +455,7 @@ article:hover {
 
 .post-image,
 .post-thumbnail {
-    height: 200px;
+    height: 400px;
     background: linear-gradient(45deg, var(--wood-light), var(--sage-warm));
     position: relative;
     overflow: hidden;
