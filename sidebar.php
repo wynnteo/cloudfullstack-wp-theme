@@ -72,7 +72,7 @@ if (!is_active_sidebar('sidebar-1')) {
             $popular_tags = get_tags(array(
                 'orderby' => 'count',
                 'order' => 'DESC',
-                'number' => 10,
+                'number' => 20,
                 'hide_empty' => true
             ));
             if ($popular_tags) {

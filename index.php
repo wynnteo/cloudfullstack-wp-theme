@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="related-content">
                                     <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-                                    <p><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
+                                    <!-- <p><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p> -->
                                 </div>
                             </div>
                             <?php

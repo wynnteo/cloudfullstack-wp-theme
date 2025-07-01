@@ -176,6 +176,11 @@ a img.aligncenter {
     margin-right: auto;
 }
 
+.wp-block-code {
+    margin-bottom: 2em;
+    font-size: 12px;
+}
+
 .wp-caption {
     background: #fff;
     border: 1px solid #f0f0f0;
@@ -481,7 +486,7 @@ article {
 .post-thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .post-image::after,
@@ -555,6 +560,7 @@ article {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .tag,
@@ -611,6 +617,59 @@ article {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(44,44,44,0.1);
 }
+
+/* Related Posts */
+.related-posts {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-beige);
+}
+
+.related-posts h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.related-card {
+    display: flex;
+    gap: 1rem;
+    background: var(--light-beige);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.related-card:hover {
+    background: var(--background);
+    box-shadow: var(--shadow);
+}
+
+.related-image {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--accent-color), var(--sage-warm));
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.related-content h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.related-content p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
 /* Categories */
 .categories {
     display: flex;
