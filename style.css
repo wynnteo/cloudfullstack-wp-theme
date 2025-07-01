@@ -651,7 +651,7 @@ article {
     box-shadow: var(--shadow);
 }
 
-.related-image {
+.related-image img{
     width: 80px;
     height: 80px;
     background: linear-gradient(45deg, var(--accent-color), var(--sage-warm));
@@ -874,6 +874,60 @@ article {
     background: var(--accent-color);
     color: white;
     transform: translateY(-2px);
+}
+
+/* Portfolio Section */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.project-card {
+    background: var(--background);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--light-beige);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.project-image {
+    height: 200px;
+    background: linear-gradient(45deg, var(--accent-color), var(--sage-warm));
+    position: relative;
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.project-tech {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.tech-tag {
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 15px;
+    font-size: 0.8rem;
 }
 
 /* ========================================

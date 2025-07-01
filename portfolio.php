@@ -7,12 +7,6 @@
 get_header(); ?>
 
 <main class="container">
-    <div class="tab-navigation">
-        <button class="tab-button" onclick="location.href='<?php echo home_url(); ?>'">Home</button>
-        <button class="tab-button active">Portfolio</button>
-        <button class="tab-button" onclick="location.href='<?php echo home_url('/about'); ?>'">About</button>
-    </div>
-
     <!-- Portfolio Content -->
     <div class="tab-content active">
         <section class="hero">
