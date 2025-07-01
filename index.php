@@ -88,50 +88,6 @@
                     ));
                     ?>
                 </nav>
-
-                <!-- Related Posts Section -->
-                <?php if (is_home() && is_front_page()) : ?>
-                <div class="related-posts">
-                    <h3><?php esc_html_e('Featured Posts', 'nordic-tech'); ?></h3>
-                    <div class="related-grid">
-                        <?php
-                        $featured_posts = get_posts(array(
-                            'numberposts' => 3,
-                            'meta_key' => '_featured_post',
-                            'meta_value' => 'yes',
-                            'post_status' => 'publish'
-                        ));
-                        
-                        if (empty($featured_posts)) {
-                            $featured_posts = get_posts(array(
-                                'numberposts' => 3,
-                                'orderby' => 'comment_count',
-                                'order' => 'DESC'
-                            ));
-                        }
-                        
-                        foreach ($featured_posts as $post) {
-                            setup_postdata($post);
-                            ?>
-                            <div class="related-card">
-                                <div class="related-image">
-                                    <?php if (has_post_thumbnail()) {
-                                        the_post_thumbnail('medium');
-                                    } ?>
-                                </div>
-                                <div class="related-content">
-                                    <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-                                    <!-- <p><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p> -->
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        wp_reset_postdata();
-                        ?>
-                    </div>
-                </div>
-                <?php endif; ?>
-                
             <?php else : ?>
                 <div class="post-card">
                     <div class="post-content">
