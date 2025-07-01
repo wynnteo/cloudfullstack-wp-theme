@@ -48,7 +48,7 @@ if (!is_active_sidebar('sidebar-1')) {
     </div>
 
     <!-- Categories Widget -->
-    <div class="widget">
+    <div class="widget tags-widget">
         <h3><?php esc_html_e('Categories', 'nordic-tech'); ?></h3>
         <ul class="widget-list">
             <?php
@@ -65,7 +65,7 @@ if (!is_active_sidebar('sidebar-1')) {
     </div>
 
     <!-- Popular Tags Widget -->
-    <div class="widget">
+    <div class="widget tags-widget">
         <h3><?php esc_html_e('Popular Tags', 'nordic-tech'); ?></h3>
         <ul class="widget-list">
             <?php

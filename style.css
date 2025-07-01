@@ -575,6 +575,42 @@ article {
     color: var(--text-dark);
 }
 
+/* Popular Tags Widget - Tag Cloud Style */
+.tags-widget .widget .widget-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-start;
+}
+
+.tags-widget .widget .widget-list li {
+    border: none;
+    padding: 0;
+    margin: 0;
+    flex: none;
+}
+
+.tags-widget .widget .widget-list li a {
+    padding: 0.4rem 0.8rem;
+    background: var(--light-beige);
+    border: 1px solid var(--warm-beige);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.tags-widget .widget .widget-list li a:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(44,44,44,0.1);
+}
 /* Categories */
 .categories {
     display: flex;
