@@ -3,8 +3,16 @@
 <main class="container">
     <?php if (is_home() && is_front_page()) : ?>
     <section class="hero">
-        <h1>Welcome to Nordic Tech</h1>
-        <p>Exploring the intersection of technology, design, and Scandinavian minimalism. Join me on a journey through clean code, elegant solutions, and thoughtful innovation.</p>
+        <h1><?php echo esc_html(get_theme_mod('hero_title', 'Welcome to Nordic Tech')); ?></h1>
+        <p><?php echo esc_html(get_theme_mod('hero_description', 'Exploring the intersection of technology, design, and Scandinavian minimalism. Join me on a journey through clean code, elegant solutions, and thoughtful innovation.')); ?></p>
+        
+        <?php if (get_theme_mod('hero_show_button', true)) : ?>
+            <div class="hero-actions">
+                <a href="<?php echo esc_url(get_theme_mod('hero_button_url', '#')); ?>" class="hero-button">
+                    <?php echo esc_html(get_theme_mod('hero_button_text', 'Get Started')); ?>
+                </a>
+            </div>
+        <?php endif; ?>
     </section>
     <?php endif; ?>
 

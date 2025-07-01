@@ -907,3 +907,133 @@ function nordic_tech_flush_rewrite_rules() {
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'nordic_tech_flush_rewrite_rules');
+
+
+// Add Customizer settings for hero section
+function nordic_tech_customize_register($wp_customize) {
+    // Hero Section Panel
+    $wp_customize->add_section('hero_section', array(
+        'title'    => __('Hero Section', 'nordic-tech'),
+        'priority' => 30,
+    ));
+
+    // Hero Title
+    $wp_customize->add_setting('hero_title', array(
+        'default'           => 'Welcome to Nordic Tech',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_title', array(
+        'label'    => __('Hero Title', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'text',
+    ));
+
+    // Hero Description
+    $wp_customize->add_setting('hero_description', array(
+        'default'           => 'Exploring the intersection of technology, design, and Scandinavian minimalism. Join me on a journey through clean code, elegant solutions, and thoughtful innovation.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_description', array(
+        'label'    => __('Hero Description', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'textarea',
+    ));
+
+    // Show Button Toggle
+    $wp_customize->add_setting('hero_show_button', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_show_button', array(
+        'label'    => __('Show Hero Button', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'checkbox',
+    ));
+
+    // Button Text
+    $wp_customize->add_setting('hero_button_text', array(
+        'default'           => 'Get Started',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_button_text', array(
+        'label'    => __('Button Text', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'text',
+    ));
+
+    // Button URL
+    $wp_customize->add_setting('hero_button_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_button_url', array(
+        'label'    => __('Button URL', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'url',
+    ));
+}
+add_action('customize_register', 'nordic_tech_customize_register');
+
+function add_portfolio_hero_meta_boxes() {
+    add_meta_box(
+        'portfolio-hero-settings',
+        'Portfolio Hero Section',
+        'portfolio_hero_meta_box_callback',
+        'page',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'add_portfolio_hero_meta_boxes');
+
+function portfolio_hero_meta_box_callback($post) {
+    // Add nonce field for security
+    wp_nonce_field('portfolio_hero_meta_box', 'portfolio_hero_meta_box_nonce');
+    
+    // Get current values
+    $title = get_post_meta($post->ID, '_portfolio_hero_title', true);
+    $description = get_post_meta($post->ID, '_portfolio_hero_description', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="portfolio_hero_title">Hero Title</label></th>';
+    echo '<td><input type="text" id="portfolio_hero_title" name="portfolio_hero_title" value="' . esc_attr($title) . '" class="regular-text" placeholder="My Work" /></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="portfolio_hero_description">Hero Description</label></th>';
+    echo '<td><textarea id="portfolio_hero_description" name="portfolio_hero_description" rows="3" class="large-text">' . esc_textarea($description) . '</textarea></td>';
+    echo '</tr>';
+    echo '</table>';
+}
+
+function save_portfolio_hero_meta_box($post_id) {
+    // Check if nonce is valid
+    if (!isset($_POST['portfolio_hero_meta_box_nonce']) || !wp_verify_nonce($_POST['portfolio_hero_meta_box_nonce'], 'portfolio_hero_meta_box')) {
+        return;
+    }
+    
+    // Check if user has permission to edit
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+    
+    // Save the custom fields
+    if (isset($_POST['portfolio_hero_title'])) {
+        update_post_meta($post_id, '_portfolio_hero_title', sanitize_text_field($_POST['portfolio_hero_title']));
+    }
+    
+    if (isset($_POST['portfolio_hero_description'])) {
+        update_post_meta($post_id, '_portfolio_hero_description', sanitize_textarea_field($_POST['portfolio_hero_description']));
+    }
+}
+add_action('save_post', 'save_portfolio_hero_meta_box');

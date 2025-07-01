@@ -510,16 +510,15 @@ article {
 .entry-meta {
     display: flex;
     gap: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     font-size: 0.9rem;
     color: var(--text-light);
 }
 
 .post-title,
 .entry-title {
-    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     color: var(--primary-color);
 }
 
@@ -1902,4 +1901,25 @@ input[type="submit"]:hover {
         text-decoration: underline;
         color: #000;
     }
+}
+
+/* Hero Button Styles */
+.hero-actions {
+    margin-top: 2rem;
+}
+
+.hero-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2c3e50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+    background-color: #34495e;
+    color: white;
 }

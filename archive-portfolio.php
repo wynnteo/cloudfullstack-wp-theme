@@ -9,21 +9,32 @@ get_header(); ?>
 <main class="container">
     <!-- Portfolio Content -->
     <div class="tab-content active">
-        <section class="hero">
-            <h1><?php echo get_the_title() ?: 'My Work'; ?></h1>
-            <p><?php 
-                if (have_posts()) {
-                    the_post();
-                    if (get_the_content()) {
-                        echo get_the_excerpt() ?: 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
-                    } else {
-                        echo 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
-                    }
-                    rewind_posts();
-                } else {
-                    echo 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
+        <?php
+        $portfolio_title = get_post_meta(get_the_ID(), '_portfolio_hero_title', true);
+        $portfolio_description = get_post_meta(get_the_ID(), '_portfolio_hero_description', true);
+
+        // Fallback to page title and content if custom fields are empty
+        if (empty($portfolio_title)) {
+            $portfolio_title = get_the_title() ?: 'My Work';
+        }
+
+        if (empty($portfolio_description)) {
+            if (have_posts()) {
+                the_post();
+                $portfolio_description = get_the_excerpt() ?: get_the_content();
+                if (empty($portfolio_description)) {
+                    $portfolio_description = 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
                 }
-            ?></p>
+                rewind_posts();
+            } else {
+                $portfolio_description = 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
+            }
+        }
+        ?>
+
+        <section class="hero">
+            <h1><?php echo esc_html($portfolio_title); ?></h1>
+            <p><?php echo wp_kses_post($portfolio_description); ?></p>
         </section>
 
         <?php
