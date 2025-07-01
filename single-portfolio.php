@@ -164,6 +164,7 @@ get_header(); ?>
 
             </article>
         <?php endwhile; ?>
+        <?php get_sidebar(); ?>
     </div>
 </main>
 
