@@ -25,13 +25,13 @@
             </div>
         <?php else : ?>
             <!-- Default footer content when no widgets are active -->
-            <div class="footer-widgets">
-                <div class="footer-widget">
+            <div class="footer-content">
+                <div class="footer-section">
                     <h3><?php esc_html_e('About', 'nordic-tech'); ?> <?php bloginfo('name'); ?></h3>
                     <p><?php echo get_bloginfo('description') ?: esc_html__('A clean, minimalist WordPress theme inspired by Scandinavian design principles.', 'nordic-tech'); ?></p>
                 </div>
                 
-                <div class="footer-widget">
+                <div class="footer-section">
                     <h3><?php esc_html_e('Quick Links', 'nordic-tech'); ?></h3>
                     <?php
                     wp_nav_menu(array(
@@ -43,7 +43,7 @@
                     ?>
                 </div>
                 
-                <div class="footer-widget">
+                <div class="footer-section">
                     <h3><?php esc_html_e('Recent Posts', 'nordic-tech'); ?></h3>
                     <ul>
                         <?php
