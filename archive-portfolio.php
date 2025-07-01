@@ -17,19 +17,6 @@ get_header(); ?>
         if (empty($portfolio_title)) {
             $portfolio_title = get_the_title() ?: 'My Work';
         }
-
-        if (empty($portfolio_description)) {
-            if (have_posts()) {
-                the_post();
-                $portfolio_description = get_the_excerpt() ?: get_the_content();
-                if (empty($portfolio_description)) {
-                    $portfolio_description = 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
-                }
-                rewind_posts();
-            } else {
-                $portfolio_description = 'A collection of projects that showcase my passion for clean code, thoughtful design, and innovative solutions.';
-            }
-        }
         ?>
 
         <section class="hero">

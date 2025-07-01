@@ -997,8 +997,8 @@ function add_portfolio_hero_meta_boxes() {
 add_action('add_meta_boxes', 'add_portfolio_hero_meta_boxes');
 
 function portfolio_hero_meta_box_callback($post) {
-    // Add nonce field for security
-    wp_nonce_field('portfolio_hero_meta_box', 'portfolio_hero_meta_box_nonce');
+    // Add nonce field for security - FIXED: matching nonce names
+    wp_nonce_field('portfolio_hero_nonce_action', 'portfolio_hero_nonce');
     
     // Get current values
     $title = get_post_meta($post->ID, '_portfolio_hero_title', true);
@@ -1011,14 +1011,19 @@ function portfolio_hero_meta_box_callback($post) {
     echo '</tr>';
     echo '<tr>';
     echo '<th><label for="portfolio_hero_description">Hero Description</label></th>';
-    echo '<td><textarea id="portfolio_hero_description" name="portfolio_hero_description" rows="3" class="large-text">' . esc_textarea($description) . '</textarea></td>';
+    echo '<td><textarea id="portfolio_hero_description" name="portfolio_hero_description" rows="3" class="large-text" placeholder="A showcase of my creative work and technical projects.">' . esc_textarea($description) . '</textarea></td>';
     echo '</tr>';
     echo '</table>';
 }
 
 function save_portfolio_hero_meta_box($post_id) {
-    // Check if nonce is valid
-    if (!isset($_POST['portfolio_hero_meta_box_nonce']) || !wp_verify_nonce($_POST['portfolio_hero_meta_box_nonce'], 'portfolio_hero_meta_box')) {
+    // Check if nonce is valid - FIXED: matching nonce names
+    if (!isset($_POST['portfolio_hero_nonce']) || !wp_verify_nonce($_POST['portfolio_hero_nonce'], 'portfolio_hero_nonce_action')) {
+        return;
+    }
+    
+    // Prevent autosave from overriding
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
     }
     
