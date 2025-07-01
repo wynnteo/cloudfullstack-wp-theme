@@ -44,7 +44,7 @@ get_header(); ?>
             </div>
         <?php endif; ?>
 
-        <div class="portfolio-grid" id="portfolioGrid">
+        <div class="portolio portfolio-grid" id="portfolioGrid">
             <?php
             // Get portfolio items
             $portfolio_query = nordic_tech_get_portfolio_items(array(

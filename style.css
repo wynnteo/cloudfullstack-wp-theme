@@ -557,11 +557,11 @@ article {
 /* Post Tags */
 .post-tags,
 .entry-footer {
-    margin-top: 1rem;
+    margin-top: 2rem;
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .tag,
@@ -747,7 +747,7 @@ article {
 .nav-links {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
     margin: 2rem 0;
 }
 
@@ -877,14 +877,14 @@ article {
 }
 
 /* Portfolio Section */
-.portfolio-grid {
+.portolio .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
 }
 
-.project-card {
+.portolio .project-card {
     background: var(--background);
     border-radius: 12px;
     overflow: hidden;
@@ -893,36 +893,41 @@ article {
     border: 1px solid var(--light-beige);
 }
 
-.project-card:hover {
+.portolio .project-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
 }
 
-.project-image {
+.portolio .project-image {
     height: 200px;
     background: linear-gradient(45deg, var(--accent-color), var(--sage-warm));
     position: relative;
 }
 
-.project-info {
+.portolio .project-image img{
+    object-fit: contain;
+}
+
+
+.portolio .project-info {
     padding: 1.5rem;
 }
 
-.project-title {
+.portolio .project-title {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
 }
 
-.project-tech {
+.portolio .project-tech {
     display: flex;
     gap: 0.5rem;
     margin-top: 1rem;
     flex-wrap: wrap;
 }
 
-.tech-tag {
+.portolio .tech-tag {
     padding: 0.25rem 0.75rem;
     background: var(--accent-color);
     color: white;
@@ -930,6 +935,82 @@ article {
     font-size: 0.8rem;
 }
 
+/* ========================================
+   WORDPRESS BLOCK LIST STYLES
+======================================== */
+
+/* Block List Container */
+.wp-block-list {
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+/* Ordered Lists */
+.wp-block-list.is-style-ordered,
+ol.wp-block-list {
+    list-style: decimal;
+    padding-left: 2rem;
+}
+
+/* Unordered Lists */
+ul.wp-block-list {
+    list-style: disc;
+    padding-left: 2rem;
+}
+
+/* List Items */
+.wp-block-list li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    position: relative;
+}
+
+.wp-block-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Nested Lists */
+.wp-block-list li ul,
+.wp-block-list li ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.wp-block-list li ul {
+    list-style: circle;
+}
+
+.wp-block-list li ol {
+    list-style: lower-alpha;
+}
+
+/* Third level nesting */
+.wp-block-list li ul li ul {
+    list-style: square;
+}
+
+.wp-block-list li ol li ol {
+    list-style: lower-roman;
+}
+
+/* Custom List Styles */
+.wp-block-list.is-style-none {
+    list-style: none;
+    padding-left: 0;
+}
+
+.wp-block-list.is-style-none li {
+    padding-left: 0;
+}
+
+.wp-block-heading {
+        margin-bottom: 2rem;
+    margin-top: 2rem;
+}
 /* ========================================
    COMMENTS
 ======================================== */
