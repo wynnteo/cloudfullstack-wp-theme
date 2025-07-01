@@ -4,7 +4,7 @@
 <footer id="colophon" class="site-footer">
     <div class="container">
         <?php if (is_active_sidebar('footer-1') || is_active_sidebar('footer-2') || is_active_sidebar('footer-3')) : ?>
-            <div class="footer-widgets">
+            <div class="footer-content">
                 <?php if (is_active_sidebar('footer-1')) : ?>
                     <div class="footer-widget">
                         <?php dynamic_sidebar('footer-1'); ?>

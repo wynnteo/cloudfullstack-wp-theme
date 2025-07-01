@@ -977,11 +977,56 @@ article {
     color: var(--sage-warm);
 }
 
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.footer-social a:hover {
+    background: var(--accent-color);
+    transform: translateY(-3px);
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(255,255,255,0.1);
     color: #999999;
+}
+
+/* Contact Info Styles */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #cccccc;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item i {
+    width: 20px;
+    text-align: center;
 }
 
 /* ========================================
@@ -1089,6 +1134,15 @@ input[type="submit"]:hover {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+    
+    footer {
+        padding: 2rem 0 1rem;
+        margin-top: 2rem;
     }
 
     .logo-area {
