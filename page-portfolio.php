@@ -10,13 +10,29 @@ get_header(); ?>
     <!-- Portfolio Content -->
     <div class="tab-content active">
         <?php
-        $portfolio_title = get_post_meta(get_the_ID(), '_portfolio_hero_title', true);
-        $portfolio_description = get_post_meta(get_the_ID(), '_portfolio_hero_description', true);
+            // Get the page that uses the portfolio template
+            $portfolio_page = get_page_by_path('portfolio'); // Adjust 'portfolio' to your actual page slug
+            if (!$portfolio_page) {
+                // Alternative: find page with portfolio template
+                $pages = get_pages(array(
+                    'meta_key' => '_wp_page_template',
+                    'meta_value' => 'archive-portfolio.php'
+                ));
+                $portfolio_page = !empty($pages) ? $pages[0] : null;
+            }
 
-        // Fallback to page title and content if custom fields are empty
-        if (empty($portfolio_title)) {
-            $portfolio_title = get_the_title() ?: 'My Work';
-        }
+            $portfolio_title = '';
+            $portfolio_description = '';
+
+            if ($portfolio_page) {
+                $portfolio_title = get_post_meta($portfolio_page->ID, '_portfolio_hero_title', true);
+                $portfolio_description = get_post_meta($portfolio_page->ID, '_portfolio_hero_description', true);
+            }
+
+            // Fallback values
+            if (empty($portfolio_title)) {
+                $portfolio_title = $portfolio_page ? get_the_title($portfolio_page->ID) : 'My Work';
+            }
         ?>
 
         <section class="hero">

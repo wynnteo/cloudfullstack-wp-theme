@@ -573,6 +573,93 @@ function nordic_tech_add_reading_progress() {
 add_action('wp_footer', 'nordic_tech_add_reading_progress');
 
 /**
+ * Flush rewrite rules on theme activation
+ */
+function nordic_tech_flush_rewrite_rules() {
+    nordic_tech_register_portfolio_post_type();
+    nordic_tech_register_portfolio_taxonomy();
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'nordic_tech_flush_rewrite_rules');
+
+
+// Add Customizer settings for hero section
+function nordic_tech_customize_register($wp_customize) {
+    // Hero Section Panel
+    $wp_customize->add_section('hero_section', array(
+        'title'    => __('Hero Section', 'nordic-tech'),
+        'priority' => 30,
+    ));
+
+    // Hero Title
+    $wp_customize->add_setting('hero_title', array(
+        'default'           => 'Welcome to Nordic Tech',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_title', array(
+        'label'    => __('Hero Title', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'text',
+    ));
+
+    // Hero Description
+    $wp_customize->add_setting('hero_description', array(
+        'default'           => 'Exploring the intersection of technology, design, and Scandinavian minimalism. Join me on a journey through clean code, elegant solutions, and thoughtful innovation.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_description', array(
+        'label'    => __('Hero Description', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'textarea',
+    ));
+
+    // Show Button Toggle
+    $wp_customize->add_setting('hero_show_button', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_show_button', array(
+        'label'    => __('Show Hero Button', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'checkbox',
+    ));
+
+    // Button Text
+    $wp_customize->add_setting('hero_button_text', array(
+        'default'           => 'Get Started',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_button_text', array(
+        'label'    => __('Button Text', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'text',
+    ));
+
+    // Button URL
+    $wp_customize->add_setting('hero_button_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+    
+    $wp_customize->add_control('hero_button_url', array(
+        'label'    => __('Button URL', 'nordic-tech'),
+        'section'  => 'hero_section',
+        'type'     => 'url',
+    ));
+}
+add_action('customize_register', 'nordic_tech_customize_register');
+
+
+/**
  * Portfolio Custom Post Type and Functionality
  * Add this to your functions.php file
  */
@@ -898,101 +985,19 @@ function nordic_tech_portfolio_shortcode($atts) {
 }
 add_shortcode('portfolio', 'nordic_tech_portfolio_shortcode');
 
-/**
- * Flush rewrite rules on theme activation
- */
-function nordic_tech_flush_rewrite_rules() {
-    nordic_tech_register_portfolio_post_type();
-    nordic_tech_register_portfolio_taxonomy();
-    flush_rewrite_rules();
-}
-register_activation_hook(__FILE__, 'nordic_tech_flush_rewrite_rules');
-
-
-// Add Customizer settings for hero section
-function nordic_tech_customize_register($wp_customize) {
-    // Hero Section Panel
-    $wp_customize->add_section('hero_section', array(
-        'title'    => __('Hero Section', 'nordic-tech'),
-        'priority' => 30,
-    ));
-
-    // Hero Title
-    $wp_customize->add_setting('hero_title', array(
-        'default'           => 'Welcome to Nordic Tech',
-        'sanitize_callback' => 'sanitize_text_field',
-        'transport'         => 'refresh',
-    ));
-    
-    $wp_customize->add_control('hero_title', array(
-        'label'    => __('Hero Title', 'nordic-tech'),
-        'section'  => 'hero_section',
-        'type'     => 'text',
-    ));
-
-    // Hero Description
-    $wp_customize->add_setting('hero_description', array(
-        'default'           => 'Exploring the intersection of technology, design, and Scandinavian minimalism. Join me on a journey through clean code, elegant solutions, and thoughtful innovation.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-        'transport'         => 'refresh',
-    ));
-    
-    $wp_customize->add_control('hero_description', array(
-        'label'    => __('Hero Description', 'nordic-tech'),
-        'section'  => 'hero_section',
-        'type'     => 'textarea',
-    ));
-
-    // Show Button Toggle
-    $wp_customize->add_setting('hero_show_button', array(
-        'default'           => true,
-        'sanitize_callback' => 'wp_validate_boolean',
-        'transport'         => 'refresh',
-    ));
-    
-    $wp_customize->add_control('hero_show_button', array(
-        'label'    => __('Show Hero Button', 'nordic-tech'),
-        'section'  => 'hero_section',
-        'type'     => 'checkbox',
-    ));
-
-    // Button Text
-    $wp_customize->add_setting('hero_button_text', array(
-        'default'           => 'Get Started',
-        'sanitize_callback' => 'sanitize_text_field',
-        'transport'         => 'refresh',
-    ));
-    
-    $wp_customize->add_control('hero_button_text', array(
-        'label'    => __('Button Text', 'nordic-tech'),
-        'section'  => 'hero_section',
-        'type'     => 'text',
-    ));
-
-    // Button URL
-    $wp_customize->add_setting('hero_button_url', array(
-        'default'           => '#',
-        'sanitize_callback' => 'esc_url_raw',
-        'transport'         => 'refresh',
-    ));
-    
-    $wp_customize->add_control('hero_button_url', array(
-        'label'    => __('Button URL', 'nordic-tech'),
-        'section'  => 'hero_section',
-        'type'     => 'url',
-    ));
-}
-add_action('customize_register', 'nordic_tech_customize_register');
-
 function add_portfolio_hero_meta_boxes() {
-    add_meta_box(
-        'portfolio-hero-settings',
-        'Portfolio Hero Section',
-        'portfolio_hero_meta_box_callback',
-        'page',
-        'normal',
-        'high'
-    );
+    // Only add to the specific portfolio page
+    global $post;
+    if ($post && $post->post_name === 'portfolio') { // or use post ID
+        add_meta_box(
+            'portfolio-hero-settings',
+            'Portfolio Hero Section',
+            'portfolio_hero_meta_box_callback',
+            'page',
+            'normal',
+            'high'
+        );
+    }
 }
 add_action('add_meta_boxes', 'add_portfolio_hero_meta_boxes');
 
