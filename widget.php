@@ -4,40 +4,6 @@
  * Add this to your theme's functions.php or create a separate widgets.php file
  */
 
-// Register widget areas
-function nordic_tech_widgets_init() {
-    register_sidebar(array(
-        'name'          => __('Footer Area 1', 'nordic-tech'),
-        'id'            => 'footer-1',
-        'description'   => __('Add widgets here to appear in the first footer column.', 'nordic-tech'),
-        'before_widget' => '<div class="footer-widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ));
-    
-    register_sidebar(array(
-        'name'          => __('Footer Area 2', 'nordic-tech'),
-        'id'            => 'footer-2',
-        'description'   => __('Add widgets here to appear in the second footer column.', 'nordic-tech'),
-        'before_widget' => '<div class="footer-widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ));
-    
-    register_sidebar(array(
-        'name'          => __('Footer Area 3', 'nordic-tech'),
-        'id'            => 'footer-3',
-        'description'   => __('Add widgets here to appear in the third footer column.', 'nordic-tech'),
-        'before_widget' => '<div class="footer-widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ));
-}
-add_action('widgets_init', 'nordic_tech_widgets_init');
-
 /**
  * Custom About Widget
  */
