@@ -9,35 +9,20 @@ get_header(); ?>
 <main class="container">
     <!-- Portfolio Content -->
     <div class="tab-content active">
-        <?php
-            // Get the page that uses the portfolio template
-            $portfolio_page = get_page_by_path('portfolio'); // Adjust 'portfolio' to your actual page slug
-            if (!$portfolio_page) {
-                // Alternative: find page with portfolio template
-                $pages = get_pages(array(
-                    'meta_key' => '_wp_page_template',
-                    'meta_value' => 'archive-portfolio.php'
-                ));
-                $portfolio_page = !empty($pages) ? $pages[0] : null;
-            }
-
-            $portfolio_title = '';
-            $portfolio_description = '';
-
-            if ($portfolio_page) {
-                $portfolio_title = get_post_meta($portfolio_page->ID, '_portfolio_hero_title', true);
-                $portfolio_description = get_post_meta($portfolio_page->ID, '_portfolio_hero_description', true);
-            }
-
-            // Fallback values
-            if (empty($portfolio_title)) {
-                $portfolio_title = $portfolio_page ? get_the_title($portfolio_page->ID) : 'My Work';
-            }
-        ?>
-
         <section class="hero">
-            <h1><?php echo esc_html($portfolio_title); ?></h1>
-            <p><?php echo wp_kses_post($portfolio_description); ?></p>
+            <h1><?php 
+                    echo esc_html(get_theme_mod('portfolio_archive_title', 'My Portfolio'));
+                    ?></h1>
+            <p><?php 
+                    echo esc_html(get_theme_mod('portfolio_archive_description', 'A showcase of my creative work and technical projects.'));
+                    ?></p>
+            <?php if (get_theme_mod('portfolio_show_button', true)) : ?>
+                    <div class="hero-actions">
+                        <a href="<?php echo esc_url(get_theme_mod('portfolio_button_url', '#featured')); ?>" class="btn btn-primary">
+                            <?php echo esc_html(get_theme_mod('portfolio_button_text', 'View Featured Work')); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
         </section>
 
         <?php
@@ -440,6 +425,33 @@ get_header(); ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            portfolioItems.forEach(item => {
+                if (filter === '*') {
+                    item.style.display = 'block';
+                } else {
+                    if (item.classList.contains(filter.replace('.', ''))) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+    
     // Portfolio filtering functionality
     const filterBtns = document.querySelectorAll('.filter-btn');
     const portfolioGrid = document.getElementById('portfolioGrid');

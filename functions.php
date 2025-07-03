@@ -984,66 +984,80 @@ function nordic_tech_portfolio_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('portfolio', 'nordic_tech_portfolio_shortcode');
+<?php
+// Add this to your existing nordic_tech_customize_register function in functions.php
 
-function add_portfolio_hero_meta_boxes() {
-    // Only add to the specific portfolio page
-    global $post;
-    if ($post && $post->post_name === 'portfolio') { // or use post ID
-        add_meta_box(
-            'portfolio-hero-settings',
-            'Portfolio Hero Section',
-            'portfolio_hero_meta_box_callback',
-            'page',
-            'normal',
-            'high'
-        );
-    }
-}
-add_action('add_meta_boxes', 'add_portfolio_hero_meta_boxes');
+function nordic_tech_customize_register_portfolio_archive($wp_customize) {
+    // Portfolio Archive Section
+    $wp_customize->add_section('portfolio_archive_section', array(
+        'title'    => __('Portfolio Archive', 'nordic-tech'),
+        'priority' => 35,
+    ));
 
-function portfolio_hero_meta_box_callback($post) {
-    // Add nonce field for security - FIXED: matching nonce names
-    wp_nonce_field('portfolio_hero_nonce_action', 'portfolio_hero_nonce');
+    // Archive Title
+    $wp_customize->add_setting('portfolio_archive_title', array(
+        'default'           => 'My Portfolio',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
     
-    // Get current values
-    $title = get_post_meta($post->ID, '_portfolio_hero_title', true);
-    $description = get_post_meta($post->ID, '_portfolio_hero_description', true);
-    
-    echo '<table class="form-table">';
-    echo '<tr>';
-    echo '<th><label for="portfolio_hero_title">Hero Title</label></th>';
-    echo '<td><input type="text" id="portfolio_hero_title" name="portfolio_hero_title" value="' . esc_attr($title) . '" class="regular-text" placeholder="My Work" /></td>';
-    echo '</tr>';
-    echo '<tr>';
-    echo '<th><label for="portfolio_hero_description">Hero Description</label></th>';
-    echo '<td><textarea id="portfolio_hero_description" name="portfolio_hero_description" rows="3" class="large-text" placeholder="A showcase of my creative work and technical projects.">' . esc_textarea($description) . '</textarea></td>';
-    echo '</tr>';
-    echo '</table>';
-}
+    $wp_customize->add_control('portfolio_archive_title', array(
+        'label'    => __('Portfolio Archive Title', 'nordic-tech'),
+        'section'  => 'portfolio_archive_section',
+        'type'     => 'text',
+    ));
 
-function save_portfolio_hero_meta_box($post_id) {
-    // Check if nonce is valid - FIXED: matching nonce names
-    if (!isset($_POST['portfolio_hero_nonce']) || !wp_verify_nonce($_POST['portfolio_hero_nonce'], 'portfolio_hero_nonce_action')) {
-        return;
-    }
+    // Archive Description
+    $wp_customize->add_setting('portfolio_archive_description', array(
+        'default'           => 'A showcase of my creative work and technical projects.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'transport'         => 'refresh',
+    ));
     
-    // Prevent autosave from overriding
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
-    }
+    $wp_customize->add_control('portfolio_archive_description', array(
+        'label'    => __('Portfolio Archive Description', 'nordic-tech'),
+        'section'  => 'portfolio_archive_section',
+        'type'     => 'textarea',
+    ));
+
+    // Show Button Toggle
+    $wp_customize->add_setting('portfolio_show_button', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+        'transport'         => 'refresh',
+    ));
     
-    // Check if user has permission to edit
-    if (!current_user_can('edit_post', $post_id)) {
-        return;
-    }
+    $wp_customize->add_control('portfolio_show_button', array(
+        'label'    => __('Show Portfolio Button', 'nordic-tech'),
+        'section'  => 'portfolio_archive_section',
+        'type'     => 'checkbox',
+    ));
+
+    // Button Text
+    $wp_customize->add_setting('portfolio_button_text', array(
+        'default'           => 'View Featured Work',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
     
-    // Save the custom fields
-    if (isset($_POST['portfolio_hero_title'])) {
-        update_post_meta($post_id, '_portfolio_hero_title', sanitize_text_field($_POST['portfolio_hero_title']));
-    }
+    $wp_customize->add_control('portfolio_button_text', array(
+        'label'    => __('Portfolio Button Text', 'nordic-tech'),
+        'section'  => 'portfolio_archive_section',
+        'type'     => 'text',
+    ));
+
+    // Button URL
+    $wp_customize->add_setting('portfolio_button_url', array(
+        'default'           => '#featured',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
     
-    if (isset($_POST['portfolio_hero_description'])) {
-        update_post_meta($post_id, '_portfolio_hero_description', sanitize_textarea_field($_POST['portfolio_hero_description']));
-    }
+    $wp_customize->add_control('portfolio_button_url', array(
+        'label'    => __('Portfolio Button URL', 'nordic-tech'),
+        'section'  => 'portfolio_archive_section',
+        'type'     => 'url',
+    ));
 }
-add_action('save_post', 'save_portfolio_hero_meta_box');
+add_action('customize_register', 'nordic_tech_customize_register_portfolio_archive');
+?>
