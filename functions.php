@@ -984,7 +984,6 @@ function nordic_tech_portfolio_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('portfolio', 'nordic_tech_portfolio_shortcode');
-<?php
 // Add this to your existing nordic_tech_customize_register function in functions.php
 
 function nordic_tech_customize_register_portfolio_archive($wp_customize) {
