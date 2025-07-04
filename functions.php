@@ -82,7 +82,7 @@ function nordic_tech_widgets_init() {
         'name'          => esc_html__('Footer Widget 1', 'nordic-tech'),
         'id'            => 'footer-1',
         'description'   => esc_html__('Add widgets here to appear in the first footer column.', 'nordic-tech'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'before_widget' => '<div id="%1$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
@@ -92,7 +92,7 @@ function nordic_tech_widgets_init() {
         'name'          => esc_html__('Footer Widget 2', 'nordic-tech'),
         'id'            => 'footer-2',
         'description'   => esc_html__('Add widgets here to appear in the second footer column.', 'nordic-tech'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'before_widget' => '<div id="%1$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
@@ -102,7 +102,7 @@ function nordic_tech_widgets_init() {
         'name'          => esc_html__('Footer Widget 3', 'nordic-tech'),
         'id'            => 'footer-3',
         'description'   => esc_html__('Add widgets here to appear in the third footer column.', 'nordic-tech'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'before_widget' => '<div id="%1$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
@@ -396,14 +396,18 @@ function nordic_tech_register_widgets() {
     register_widget('Nordic_Contact_Widget');
     register_widget('Nordic_Recent_Posts_Widget');
 }
-add_action('widgets_init', 'nordic_tech_register_widgets');
+add_action('widgets_init', 'nordic_tech_register_widgets', 5);
 
 /**
  * Auto-populate footer widgets on theme activation
  */
 function nordic_tech_setup_default_widgets() {
     // Check if widgets are already set up
+    error_log('Setting up default widgets...');
+    
+    // Check if widgets are already set up
     if (get_option('nordic_tech_widgets_setup')) {
+        error_log('Widgets already set up, skipping...');
         return;
     }
     
@@ -454,7 +458,7 @@ function nordic_tech_setup_default_widgets() {
     // Mark widgets as set up
     update_option('nordic_tech_widgets_setup', true);
 }
-add_action('after_switch_theme', 'nordic_tech_setup_default_widgets');
+add_action('after_switch_theme', 'nordic_tech_setup_default_widgets', 15);
 
 /**
  * Reset widgets setup flag when switching away from theme
