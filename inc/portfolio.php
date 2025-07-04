@@ -64,7 +64,7 @@ add_action('init', 'nordic_tech_register_portfolio_post_type');
 /**
  * Register Portfolio Taxonomies
  */
-function nordic_tech_register_portfolio_taxonomy() {
+function nordic_tech_register_portfolio_taxonomies() {
     $labels = array(
         'name'              => _x('Portfolio Categories', 'taxonomy general name', 'nordic-tech'),
         'singular_name'     => _x('Portfolio Category', 'taxonomy singular name', 'nordic-tech'),

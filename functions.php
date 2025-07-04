@@ -937,7 +937,7 @@ add_action('wp_footer', 'nordic_tech_add_reading_progress');
  */
 function nordic_tech_flush_rewrite_rules() {
     nordic_tech_register_portfolio_post_type();
-    nordic_tech_register_portfolio_taxonomy();
+    nordic_tech_register_portfolio_taxonomies();
 }
 register_activation_hook(__FILE__, 'nordic_tech_flush_rewrite_rules');
 
